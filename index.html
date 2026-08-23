@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Page</title>
+  <style>
+    .login-box {
+      width: 300px;                  /* Box ki width */
+      margin: 100px auto;            /* Center me lane ke liye */
+      padding: 20px;                 /* Andar space */
+      background-color: #f0f0f0;     /* Light red background */
+      border: 2px solid rgb(20, 20, 20);         /* Red border frame */
+      border-radius: 15px;           /* Corner curve */
+      box-shadow: 0 0 10px rgba(196, 187, 187, 0.3); /* Thoda shadow */
+    }
+    .error {
+      color: rgb(241, 3, 3);
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    .input-error {
+      border: 2px solid rgb(241, 7, 7);
+      background-color: #ffe5e5;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    input[type="submit"] {
+      background-color: rgb(20, 79, 206);
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .key-symbol {
+      font-size: 24px;             /* Symbol size */
+      color: goldenrod;            /* Gold colour */
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-box">
+  <h2><span class="key-symbol">🔑</span>Login</h2>
+  <form onsubmit="return checkLogin()">
+    <label>User ID:</label>
+    <input type="text" id="userid" oninput="clearError(this)">
+
+    <label>Password:</label>
+    <input type="password" id="password" oninput="clearError(this)">
+
+    <input type="submit" value="Login">
+
+    <div id="errorMsg" class="error"></div>
+  </form>
+</div>
+
+<script>
+function checkLogin() {
+  var user = document.getElementById("userid");
+  var pass = document.getElementById("password");
+  var errorMsg = document.getElementById("errorMsg");
+
+  // Multiple fixed users
+  var users = [
+    {id: "admin", pass: "12345"},
+    {id: "pawan", pass: "abcd"},
+    {id: "guest", pass: "guest123"}
+  ];
+
+  // Reset styles
+  user.classList.remove("input-error");
+  pass.classList.remove("input-error");
+  errorMsg.innerHTML = "";
+  
+   // Blank check first
+  if (user.value.trim() === "" && pass.value.trim() === "") {
+    errorMsg.innerHTML = "❌ User ID aur Password blank hain!";
+    user.classList.add("input-error");
+    pass.classList.add("input-error");
+    return false;
+  } else if (user.value.trim() === "") {
+    errorMsg.innerHTML = "❌ User ID blank hai!";
+    user.classList.add("input-error");
+    return false;
+  } else if (pass.value.trim() === "") {
+    errorMsg.innerHTML = "❌ Password blank hai!";
+    pass.classList.add("input-error");
+    return false;
+  }
+
+  // Check if entered User ID exists
+  var foundUser = users.find(u => u.id === user.value);
+
+  if (!foundUser) {
+    errorMsg.innerHTML = "❌ User ID galat hai!";
+    user.classList.add("input-error");
+    return false;
+  } else if (foundUser.pass !== pass.value) {
+    errorMsg.innerHTML = "❌ Password galat hai!";
+    pass.classList.add("input-error");
+    return false;
+  } else {
+    alert("Login Successful! Welcome " + foundUser.id);
+    return true;
+  }
+}
+
+function clearError(input) {
+  input.classList.remove("input-error");
+  document.getElementById("errorMsg").innerHTML = "";
+}
+</script>
+
+</body>
+</html>
