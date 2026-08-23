@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Page</title>
   <style>
     body {
@@ -13,17 +15,27 @@
       margin: 0;
     }
     .login-box {
-      width: 300px;                  /* Box ki width */
+      width: 100%;   
+      max-width: 400px;               /* Box ki width */
       margin: 100px auto;            /* Center me lane ke liye */
       padding: 20px;                 /* Andar space */
       background-color: #f0f0f0;     /* Light red background */
       border: 2px solid rgb(20, 20, 20);         /* Red border frame */
-      border-radius: 15px;           /* Corner curve */
+      border-radius: 8px;           /* Corner curve */
       box-shadow: 0 0 10px rgba(196, 187, 187, 0.3); /* Thoda shadow */
     }
-     h2 {
+    .login-box h2 {
       text-align: center;
       margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+     .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #979595;
+      border-radius: 6px;
+      font-size: 1rem;
     }
     .error {
       color: rgb(241, 3, 3);
