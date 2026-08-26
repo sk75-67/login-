@@ -81,6 +81,12 @@ function checkLogin() {
   var pass = document.getElementById("password");
   var errorMsg = document.getElementById("errorMsg");
 
+  function redirectToWelcome() {
+  // यहाँ आप validation भी कर सकते हैं
+  window.location.href = "welcome.html"; 
+  return false; // ताकि form reload न करे
+}
+
   // Multiple fixed users
   var users = [
     {id: "Aayush", pass: "12345"},
