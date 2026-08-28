@@ -9,7 +9,7 @@
     <h1>Welcome to Study Zone</h1>
     <div class="sections">
       <div class="section" onclick="goTo('profile.html')">👤 Profile</div>
-      <div class="section" onclick="goTo('chat.html')">💬 Chat</div><br><br>
+      <div class="section" onclick="goTo('chat.html')">💬 Chat</div>
       <div class="section" onclick="goTo('notes.html')">📘 Notes</div>
       <div class="section" onclick="goTo('test.html')">📝 Test</div>
     </div>
@@ -19,6 +19,12 @@
     function goTo(page) {
       alert("Redirecting to " + page);
       window.location.href = page;
+    }
+
+     // ✅ Username fetch from localStorage
+    let user = localStorage.getItem("loggedUser");
+    if(user) {
+      document.getElementById("welcomeMsg").innerText = "Welcome, " + user + "!";
     }
   </script>
 </body>

@@ -123,6 +123,8 @@
       pass.classList.add("input-error");
       return false;
     } else {
+        // ✅ Direct redirect with username save
+  localStorage.setItem("loggedUser", foundUser.id);
       window.location.href = "welcome.html"; // ✅ अब यहीं redirect होगा
       return false; // form reload रोकने के लिए
     }
