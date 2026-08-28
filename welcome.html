@@ -22,9 +22,9 @@
     }
 
      // ✅ Username fetch from localStorage
-    let user = localStorage.getItem("loggedUser");
+    let user = localStorage.getItem("loggedName");
     if(user) {
-      document.getElementById("welcomeMsg").innerText = "Welcome, " + user + "!";
+      document.getElementById("welcomeMsg").innerText = "Welcome, " + name + "!";
     }
   </script>
 </body>

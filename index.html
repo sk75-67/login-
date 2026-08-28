@@ -127,8 +127,11 @@
       pass.classList.add("input-error");
       return false;
     } else {
-        // ✅ Direct redirect with username save
-  localStorage.setItem("loggedUser", foundUser.id);
+    // User ka naam input se lo
+  let name = document.getElementById("name").value;
+
+  // LocalStorage me save karo
+  localStorage.setItem("loggedName", name);
       window.location.href = "welcome.html"; // ✅ अब यहीं redirect होगा
       return false; // form reload रोकने के लिए
     }
