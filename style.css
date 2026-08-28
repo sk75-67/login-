@@ -1,33 +1,63 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #f0f4f8;
-  margin: 0;
-  padding: 0;
-}
-
-.welcome-container {
-  text-align: center;
-  padding: 50px;
-}
-
-.sections {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 40px;
-}
-
-.section {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 20px;
-  width: 120px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.section:hover {
-  background: #e3f2fd;
-  transform: scale(1.05);
-}
+ body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .welcome-container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 80%;
+      max-width: 600px;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .welcome-container h1 {
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 2rem;
+    }
+    .sections {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .section {
+      background: #f7f7f7;
+      padding: 20px;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .section:hover {
+      background: #2065ce;
+      color: #fff;
+      transform: translateY(-5px);
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    .logout-btn {
+      margin-top: 30px;
+      padding: 10px 20px;
+      background: #e74c3c;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+    .logout-btn:hover {
+      background: #c0392b;
+    }

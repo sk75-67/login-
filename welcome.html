@@ -14,6 +14,7 @@
       <div class="section" onclick="goTo('notes.html')">📘 Notes</div>
       <div class="section" onclick="goTo('test.html')">📝 Test</div>
     </div>
+    <button class="logout-btn" onclick="logout()">🚪 Logout</button>
   </div>
 
   <script>
@@ -25,6 +26,11 @@
     let user = localStorage.getItem("loggedName");
     if(user) {
       document.getElementById("welcomeMsg").innerText = "Welcome, " + user + "!";
+    }
+
+    function logout() {
+      localStorage.removeItem("loggedName");
+      window.location.href = "index.html";
     }
   </script>
 </body>
