@@ -77,8 +77,9 @@
 
 <script>
   function redirectToWelcome() {
+    if(user && pass) {
   // यहाँ आप validation भी कर सकते हैं
-  window.location.href = "welcome.html"; 
+  window.location.href = "welcome.html"; }
   return false; // ताकि form reload न करे
 }
 function checkLogin() {
