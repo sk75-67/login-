@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome - Study Zone</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="welcome-container">
+    <h1>Welcome to Study Zone</h1>
+    <div class="sections">
+      <div class="section" onclick="goTo('notes.html')">📘 Notes</div>
+      <div class="section" onclick="goTo('test.html')">📝 Test</div>
+      <div class="section" onclick="goTo('chat.html')">💬 Chat</div>
+      <div class="section" onclick="goTo('profile.html')">👤 Profile</div>
+    </div>
+  </div>
+
+  <script>
+    function goTo(page) {
+      alert("Redirecting to " + page);
+      window.location.href = page;
+    }
+  </script>
+</body>
+</html>
