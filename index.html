@@ -80,67 +80,52 @@
 </div>
 
 <script>
-  function redirectToWelcome() {
-    let name = document.getElementById("name").value;
-    let user = document.getElementById("userid").value;
-    let pass = document.getElementById("password").value;
-    let errorMsg = document.getElementById("errorMsg");
+ function redirectToWelcome() {
+  let nameInput = document.getElementById("name");
+  let userInput = document.getElementById("userid");
+  let passInput = document.getElementById("password");
+  let errorMsg = document.getElementById("errorMsg");
 
-    // Multiple fixed users
-    let users = [
-      {id: "Aayush", pass: "12345"},
-      {id: "Bambam", pass: "12345"},
-      {id: "Pritam", pass: "12345"},
-      {id: "Shubham", pass: "7575"}
-    ];
+  let name = nameInput.value;
+  let user = userInput.value;
+  let pass = passInput.value;
 
-    // Reset styles
-    user.classList.remove("input-error");
-    pass.classList.remove("input-error");
-    errorMsg.innerHTML = "";
+  let users = [
+    {id: "Aayush", pass: "12345"},
+    {id: "Bambam", pass: "12345"},
+    {id: "Pritam", pass: "12345"},
+    {id: "Shubham", pass: "7575"}
+  ];
 
-    // Blank check
-    if (user.value.trim() === "" && pass.value.trim() === "") {
-      errorMsg.innerHTML = "❌ User ID aur Password blank hain!";
-      user.classList.add("input-error");
-      pass.classList.add("input-error");
-      return false;
-    } else if (user.value.trim() === "") {
-      errorMsg.innerHTML = "❌ User ID blank hai!";
-      user.classList.add("input-error");
-      return false;
-    } else if (pass.value.trim() === "") {
-      errorMsg.innerHTML = "❌ Password blank hai!";
-      pass.classList.add("input-error");
-      return false;
-    }
+  // Reset styles
+  userInput.classList.remove("input-error");
+  passInput.classList.remove("input-error");
+  errorMsg.innerHTML = "";
 
-    // Check if entered User ID exists
-    var foundUser = users.find(u => u.id === user.value);
-
-    if (!foundUser) {
-      errorMsg.innerHTML = "❌ User ID galat hai!";
-      user.classList.add("input-error");
-      return false;
-    } else if (foundUser.pass !== pass.value) {
-      errorMsg.innerHTML = "❌ Password galat hai!";
-      pass.classList.add("input-error");
-      return false;
-    } else {
-    // User ka naam input se lo
-  let name = document.getElementById("name").value;
-
-  // LocalStorage me save karo
-  localStorage.setItem("loggedName", name);
-      window.location.href = "welcome.html"; // ✅ अब यहीं redirect होगा
-      return false; // form reload रोकने के लिए
-    }
+  // Blank check
+  if (name.trim() === "" || user.trim() === "" || pass.trim() === "") {
+    errorMsg.innerHTML = "❌ Name, User ID aur Password blank nahi hone chahiye!";
+    return false;
   }
 
-  function clearError(input) {
-    input.classList.remove("input-error");
-    document.getElementById("errorMsg").innerHTML = ""; 
+  let foundUser = users.find(u => u.id === user);
+
+  if (!foundUser) {
+    errorMsg.innerHTML = "❌ User ID galat hai!";
+    userInput.classList.add("input-error");
+    return false;
+  } else if (foundUser.pass !== pass) {
+    errorMsg.innerHTML = "❌ Password galat hai!";
+    passInput.classList.add("input-error");
+    return false;
+  } else {
+    // ✅ Save Name in localStorage
+    localStorage.setItem("loggedName", name);
+    window.location.href = "welcome.html";
+    return false;
   }
+}
+
 </script>
 
 </body>

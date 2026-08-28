@@ -6,7 +6,8 @@
 </head>
 <body>
   <div class="welcome-container">
-    <h1>Welcome to Study Zone</h1>
+    <!-- ✅ id="welcomeMsg" जोड़ा -->
+    <h1 id="welcomeMsg">Welcome to Study Zone</h1>
     <div class="sections">
       <div class="section" onclick="goTo('profile.html')">👤 Profile</div>
       <div class="section" onclick="goTo('chat.html')">💬 Chat</div>
@@ -17,14 +18,13 @@
 
   <script>
     function goTo(page) {
-      alert("Redirecting to " + page);
       window.location.href = page;
     }
 
-     // ✅ Username fetch from localStorage
+    // ✅ Username fetch from localStorage
     let user = localStorage.getItem("loggedName");
     if(user) {
-      document.getElementById("welcomeMsg").innerText = "Welcome, " + name + "!";
+      document.getElementById("welcomeMsg").innerText = "Welcome, " + user + "!";
     }
   </script>
 </body>
