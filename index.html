@@ -64,6 +64,9 @@
   <h2><span class="key-symbol">🔑</span>Login</h2>
   <!-- ✅ form tag सही किया -->
   <form onsubmit="return redirectToWelcome()">
+     <label><b>Name:</b></label>
+    <input type="text" id="name" placeholder="Enter Your Name">
+
     <label><b>User ID:</b></label>
     <input type="text" id="userid" oninput="clearError(this)" placeholder="Enter User ID">
 
@@ -78,8 +81,9 @@
 
 <script>
   function redirectToWelcome() {
-    let user = document.getElementById("userid");
-    let pass = document.getElementById("password");
+    let name = document.getElementById("name").value;
+    let user = document.getElementById("userid").value;
+    let pass = document.getElementById("password").value;
     let errorMsg = document.getElementById("errorMsg");
 
     // Multiple fixed users
