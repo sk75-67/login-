@@ -77,14 +77,8 @@
 
 <script>
   function redirectToWelcome() {
-    if(user && pass) {
-  // यहाँ आप validation भी कर सकते हैं
-  window.location.href = "welcome.html"; }
-  return false; // ताकि form reload न करे
-}
-function checkLogin() {
-  var user = document.getElementById("userid");
-  var pass = document.getElementById("password");
+  let user = document.getElementById("userid");
+  let pass = document.getElementById("password");
   var errorMsg = document.getElementById("errorMsg");
 
   // Multiple fixed users
@@ -94,6 +88,10 @@ function checkLogin() {
     {id: "Pritam", pass: "12345"},
     {id: "Shubham", pass: "7575"}
   ];
+
+    if(user && pass) {
+  // यहाँ आप validation भी कर सकते हैं
+  window.location.href = "welcome.html"; }
 
   // Reset styles
   user.classList.remove("input-error");
@@ -131,12 +129,13 @@ function checkLogin() {
     alert("Login Successful! Welcome " + foundUser.id);
     return true;
   }
-}
 
 function clearError(input) {
   input.classList.remove("input-error");
-  document.getElementById("errorMsg").innerHTML = "";
+  document.getElementById("errorMsg").innerHTML = ""; 
 }
+  return false; // ताकि form reload न करे
+  }
 </script>
 
 </body>
