@@ -6,8 +6,8 @@
 </head>
 <body>
   <div class="welcome-container">
-    <!-- ✅ id="welcomeMsg" जोड़ा -->
-    <h1 id="welcomeMsg">Welcome to Study Zone</h1>
+    <!-- ✅ Heading fix -->
+    <h1><b>Study Zone</b></h1>
     <div class="sections">
       <div class="section" onclick="goTo('profile.html')">👤 Profile</div>
       <div class="section" onclick="goTo('chat.html')">💬 Chat</div>
@@ -22,10 +22,10 @@
       window.location.href = page;
     }
 
-    // ✅ Username fetch from localStorage
+   // ✅ Username fetch from localStorage
     let user = localStorage.getItem("loggedName");
     if(user) {
-      document.getElementById("welcomeMsg").innerText = "Welcome, " + user + "!";
+      alert("Welcome, " + user + "!"); // Alert message instead of heading
     }
 
     function logout() {
