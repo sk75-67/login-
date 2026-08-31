@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Study Zone - Test</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .test-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      width: 80%;
+      max-width: 600px;
+      animation: fadeIn 1s ease-in-out;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .options label {
+      display: block;
+      background: #f7f7f7;
+      padding: 10px;
+      border-radius: 8px;
+      margin: 8px 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .options label:hover {
+      background: #2065ce;
+      color: #fff;
+    }
+    .submit-btn {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background: #2065ce;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+    .submit-btn:hover {
+      background: #164a9c;
+    }
+    .result {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <h1>Study Zone - Test</h1>
+    <form id="testForm">
+      <div class="question">
+        <p><b>Q1: HTML का full form क्या है?</b></p>
+        <div class="options">
+          <label><input type="radio" name="q1" value="A"> Hyper Text Markup Language</label>
+          <label><input type="radio" name="q1" value="B"> High Tech Machine Language</label>
+          <label><input type="radio" name="q1" value="C"> Hyperlinks and Text Management Language</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <p><b>Q2: CSS का use किसलिए होता है?</b></p>
+        <div class="options">
+          <label><input type="radio" name="q2" value="A"> Web page structure</label>
+          <label><input type="radio" name="q2" value="B"> Web page styling</label>
+          <label><input type="radio" name="q2" value="C"> Database management</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <p><b>Q3: JavaScript किसके लिए use होता है?</b></p>
+        <div class="options">
+          <label><input type="radio" name="q3" value="A"> Styling</label>
+          <label><input type="radio" name="q3" value="B"> Interactivity</label>
+          <label><input type="radio" name="q3" value="C"> Server hosting</label>
+        </div>
+      </div>
+
+      <input type="submit" value="Submit Test" class="submit-btn">
+    </form>
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    document.getElementById("testForm").onsubmit = function(e) {
+      e.preventDefault();
+      let score = 0;
+
+      // ✅ Correct answers
+      let answers = {q1:"A", q2:"B", q3:"B"};
+
+      for (let q in answers) {
+        let selected = document.querySelector(`input[name="${q}"]:checked`);
+        if (selected && selected.value === answers[q]) {
+          score++;
+        }
+      }
+
+      document.getElementById("result").innerText = 
+        "✅ Your Score: " + score + "/3";
+    }
+  </script>
+</body>
+</html>
