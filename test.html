@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Study Zone - Test</title>
+  <title>Study Zone - Timed Test</title>
   <style>
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
@@ -21,16 +21,9 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
       width: 80%;
       max-width: 600px;
-      animation: fadeIn 1s ease-in-out;
-    }
-    h1 {
       text-align: center;
-      margin-bottom: 20px;
-      color: #333;
     }
-    .question {
-      margin-bottom: 20px;
-    }
+    h1 { margin-bottom: 20px; color: #333; }
     .options label {
       display: block;
       background: #f7f7f7;
@@ -40,13 +33,9 @@
       cursor: pointer;
       transition: all 0.3s ease;
     }
-    .options label:hover {
-      background: #2065ce;
-      color: #fff;
-    }
-    .submit-btn {
-      display: block;
-      margin: 20px auto;
+    .options label:hover { background: #2065ce; color: #fff; }
+    .btn {
+      margin-top: 20px;
       padding: 10px 20px;
       background: #2065ce;
       color: #fff;
@@ -54,77 +43,78 @@
       border-radius: 8px;
       cursor: pointer;
       font-size: 1rem;
-      transition: background 0.3s ease;
     }
-    .submit-btn:hover {
-      background: #164a9c;
-    }
-    .result {
-      text-align: center;
-      font-size: 1.2rem;
-      margin-top: 20px;
-      font-weight: bold;
-    }
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
+    .btn:hover { background: #164a9c; }
+    .result { font-size: 1.2rem; margin-top: 20px; font-weight: bold; }
+    .timer { font-size: 1.1rem; color: #e74c3c; margin-bottom: 15px; }
   </style>
 </head>
 <body>
   <div class="test-container">
     <h1>Study Zone - Test</h1>
-    <form id="testForm">
-      <div class="question">
-        <p><b>Q1: HTML का full form क्या है?</b></p>
-        <div class="options">
-          <label><input type="radio" name="q1" value="A"> Hyper Text Markup Language</label>
-          <label><input type="radio" name="q1" value="B"> High Tech Machine Language</label>
-          <label><input type="radio" name="q1" value="C"> Hyperlinks and Text Management Language</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <p><b>Q2: CSS का use किसलिए होता है?</b></p>
-        <div class="options">
-          <label><input type="radio" name="q2" value="A"> Web page structure</label>
-          <label><input type="radio" name="q2" value="B"> Web page styling</label>
-          <label><input type="radio" name="q2" value="C"> Database management</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <p><b>Q3: JavaScript किसके लिए use होता है?</b></p>
-        <div class="options">
-          <label><input type="radio" name="q3" value="A"> Styling</label>
-          <label><input type="radio" name="q3" value="B"> Interactivity</label>
-          <label><input type="radio" name="q3" value="C"> Server hosting</label>
-        </div>
-      </div>
-
-      <input type="submit" value="Submit Test" class="submit-btn">
-    </form>
+    <div id="timer" class="timer"></div>
+    <div id="quiz"></div>
     <div id="result" class="result"></div>
   </div>
 
   <script>
-    document.getElementById("testForm").onsubmit = function(e) {
-      e.preventDefault();
-      let score = 0;
+    const questions = [
+      {q: "HTML का full form क्या है?", options: ["Hyper Text Markup Language","High Tech Machine Language","Hyperlinks and Text Management Language"], answer: "Hyper Text Markup Language"},
+      {q: "CSS का use किसलिए होता है?", options: ["Web page structure","Web page styling","Database management"], answer: "Web page styling"},
+      {q: "JavaScript किसके लिए use होता है?", options: ["Styling","Interactivity","Server hosting"], answer: "Interactivity"}
+    ];
 
-      // ✅ Correct answers
-      let answers = {q1:"A", q2:"B", q3:"B"};
+    let current = 0;
+    let score = 0;
+    let timeLeft = 10; // ⏱ हर question के लिए 10 सेकंड
+    let timerId;
 
-      for (let q in answers) {
-        let selected = document.querySelector(`input[name="${q}"]:checked`);
-        if (selected && selected.value === answers[q]) {
-          score++;
-        }
-      }
+    function showQuestion(index) {
+      clearInterval(timerId);
+      timeLeft = 10;
+      startTimer();
 
-      document.getElementById("result").innerText = 
-        "✅ Your Score: " + score + "/3";
+      let q = questions[index];
+      let quizDiv = document.getElementById("quiz");
+      quizDiv.innerHTML = `
+        <p><b>Q${index+1}: ${q.q}</b></p>
+        <div class="options">
+          ${q.options.map(opt => `<label><input type="radio" name="option" value="${opt}"> ${opt}</label>`).join("")}
+        </div>
+        <button onclick="submitAnswer()" class="btn">Submit</button>
+      `;
     }
+
+    function startTimer() {
+      document.getElementById("timer").innerText = "⏳ Time Left: " + timeLeft + "s";
+      timerId = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timer").innerText = "⏳ Time Left: " + timeLeft + "s";
+        if(timeLeft <= 0) {
+          clearInterval(timerId);
+          submitAnswer(); // ⏱ Auto submit when time ends
+        }
+      }, 1000);
+    }
+
+    function submitAnswer() {
+      clearInterval(timerId);
+      let selected = document.querySelector('input[name="option"]:checked');
+      if(selected && selected.value === questions[current].answer) {
+        score++;
+      }
+      current++;
+      if(current < questions.length) {
+        showQuestion(current);
+      } else {
+        document.getElementById("quiz").innerHTML = "";
+        document.getElementById("timer").innerHTML = "";
+        document.getElementById("result").innerText = "✅ आपका Score: " + score + "/" + questions.length;
+      }
+    }
+
+    // Start quiz
+    showQuestion(current);
   </script>
 </body>
 </html>
